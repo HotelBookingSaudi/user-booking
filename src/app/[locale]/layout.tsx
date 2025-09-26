@@ -43,6 +43,9 @@ export async function generateMetadata({ params }: { params: { locale: string } 
       description: messages.metadata.siteDescription,
       images: ["https://user-booking.vercel.app/images/logo.png"],
     },
+    other: {
+      "google-site-verification": "vYA8i7hLQd5Ovyo-6HxZMEMUkxD5S22Psf_9e79p_wk",
+    },
   };
 }
 

@@ -15,6 +15,38 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+export async function generateMetadata({ params }: { params: { locale: string } }) {
+  const messages = (await import(`../../../messages/${params.locale}.json`)).default;
+
+  return {
+    title: messages.metadata.siteTitle,
+    description: messages.metadata.siteDescription,
+    keywords: messages.metadata.keywords,
+    openGraph: {
+      title: messages.metadata.siteTitle,
+      description: messages.metadata.siteDescription,
+      locale: params.locale === "ar" ? "ar_AR" : "en_US",
+      url: `https://user-booking.vercel.app//${params.locale}`,
+      images: [
+        {
+          url: "https://user-booking.vercel.app/images/logo.png",
+          width: 1200,
+          height: 630,
+          alt: messages.metadata.siteTitle,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: messages.metadata.siteTitle,
+      description: messages.metadata.siteDescription,
+      images: ["https://user-booking.vercel.app/images/logo.png"],
+    },
+  };
+}
+
+
 export default async function RootLayout({
   children,
   params,
